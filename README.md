@@ -8,15 +8,18 @@ This aim of this python program is to make completion predictions for the Large 
 
 * prioritiy of each program
 * time remaining / weather band 
-* ​
 
-2) gather information from the schedule - **due to be** stored as a file in: data/
+2) gather information from the schedule - currently I have a "test" file stored as a file in: data/Band3_remaining_from_LAP_page_edited.ascii
 
 3) gather information about the weathe status - as found in data/weather-average.csv
 
+## Current Structure of the program
+
+PredictionGenerator - using the jupyter notebook
 
 
-## The structure of the program
+
+## The future structure of the program
 
 * predictionmodel.py : the fie that run's the program
 * predictions/ : the module containing all the classes and modules for the program
@@ -29,27 +32,26 @@ This aim of this python program is to make completion predictions for the Large 
 
 How to split/allocated the weather for a night - i.e. random number generator for each "unit of time". What do we consider to be a "unit": 
 
-* 1-3 hors?
-* \# nights in an observing block?
-
-This unit will need references the weather statistics table
-
-ANSWER: I think that this nees to be on a ~hourly block provided we grab the statistics from a distribution. not all sources are available all the time. It becomes easy then to allocate time for calibrations/overhead - i.e. of the hour in time => 12 mins of E&C (20% of the time) => x minutes for slewing/cals/pointings.
-
-QUESTION: can I define a distribution for each month where I could then grab from - i.e rather than normal distribution or gaussian have a specific wvm distribution that is time (aka month) dependent?
+* for simplicity I assume each night is only assigned one weather band
+*  use schedule and weather stats
 
 ##### Transients
 
-Transents is a cadence observation and so requires thinking about in a slightly different way - I might ignore this for now.
+Transents is a cadence observation and so requires thinking about in a slightly different way - Ignore this for now (I will skim off the top for this program later)
 
+**Overheads** 
 
+pointing, focus, slew time, E&C,
+
+- easiest might be to simpyl add on a percentage to every program observed i.e. 20% (I can ask Mark if we have a good number for this)
 
 ### Caveats of the Prediction Model
 
 The model makes the following assumptions:
 
 * All instruments are avaliable all of the time
-* No data is obtained outside f an observing block
+* No data is obtained outside of a LAP observing block
+* Gaps of time will be filled in by PI queu and we will not flex to a worse weatherband
 
 
 
